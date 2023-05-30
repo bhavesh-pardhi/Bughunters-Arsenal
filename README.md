@@ -1,10 +1,10 @@
-# **WEB APPLICATION PENTESTING CHECKLIST**
+<h1 align="center">WEB APPLICATION PENTESTING CHECKLIST</h1>
 
 [![MasterHead](https://github.com/bhavesh-pardhi/Bughunters-Arsenal/blob/main/.github/logo.png)](https://www.instagram.com/bhavesh_pardhi_/)
 
-**OWASP Based Checklist  🌟🌟**
+<h3 align="center">🌟🌟  OWASP Based Checklist  🌟🌟</h3>
 
-**500+ Test Cases 🧑‍💻⚡**
+<h3 align="center">🧑‍💻⚡  500+ Test Cases  ⚡🧑‍💻</h3>
 
 ----
 # ***CONTENT***
