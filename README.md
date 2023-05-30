@@ -1,2 +1,539 @@
-# Bughunters-Arsenal
-BUG HUNTING/WEB APPLICATION PENTESTING CHECKLIST 
+# **WEB APPLICATION PENTESTING CHECKLIST**
+
+
+
+**OWASP Based Checklist  🌟🌟**
+
+**500+ Test Cases 🧑‍💻⚡**
+
+----
+# ***CONTENT***
+* [INFORMATION GATHERING](#information-gathering)
+* [CONFIGURATION & DEPLOYMENT MANAGEMENT TESTING](#configuration--deployment-management-testing)
+* [IDENTITY MANAGEMENT TESTING](#identity-management-testing)
+* [AUTHENTICATION TESTING](#authentication-testing)
+* [AUTHORIZATION TESTING](#authorization-testing)
+* [SESSION MANAGEMENT TESTING](#session-management-testing)
+* [INPUT VALIDATION TESTING](#input-validation-testing)
+* [ERROR HANDLING TESTING](#error-handling-testing)
+* [WEAK CRYPTOGRAPHY TESTING](#weak-cryptography-testing)
+* [BUSINESS LOGIC TESTING](#business-logic-testing)
+* [CLIENT SIDE TESTING](#client-side-testing)
+* [OTHER COMMON ISSUES](#other-common-issues)
+* [ABOUT AUTHOR](#connect-with-me)
+----
+----
+- ### ***INFORMATION GATHERING***
+
+    - **Open Source Reconnaissance**
+        - _Perform Google Dorks search_
+        - _Perform OSINT_
+    - **Fingerprinting Web Server**
+        - _Find the type of Web Server_
+        - _Find the version details of the Web Server_
+     - **Looking For Metafiles**
+        - _View the Robots.txt file_
+        - _View the Sitemap.xml file_
+        - _View the Humans.txt file_
+        - _View the Security.txt file_
+    - **Enumerating Web Server’s Applications**
+        - _Enumerating with Nmap_
+        - _Enumerating with Netcat_
+        - _Perform a DNS lookup_
+        - _Perform a Reverse DNS lookup_
+    - **Review The Web Contents**
+        - _Inspect the page source for sensitive info_
+        - _Try to find Sensitive Javascript codes_
+        - _Try to find any keys_
+        - _Make sure the autocomplete is disabled_
+    - **Identifying Application’s Entry Points**
+        - _Identify what the methods used are?_
+        - _Identify where the methods used are?_
+        - _Identify the Injection point_
+    - **Mapping Execution Paths**
+        - _Use Burp Suite_
+        - _Use Dirsearch_
+        - _Use Gobuster_
+    - **Fingerprint Web Application Framework**
+        - _Use the Wappalyzer browser extension_
+        - _Use Whatweb_
+        - _View URL extensions_
+        - _View HTML source code_
+        - _View the cookie parameter_
+        - _View the HTTP headers_
+    - **Map Application Architecture**
+        - _Map the overall site structure_
+----
+- ### ***CONFIGURATION & DEPLOYMENT MANAGEMENT TESTING***
+    - **Test Network Configuration**
+        - _Check the network configuration_
+        - _Check for default settings_
+        - _Check for default credentials_
+    - **Test Application Configuration**
+        - _Ensure only required modules are used_
+        - _Ensure unwanted modules are disabled_
+        - _Ensure the server can handle DOS_
+        - _Check how the application is handling 4xx & 5xx errors_
+        - _Check for the privilege required to run_
+        - _Check logs for sensitive info_
+    - **Test File Extension Handling**
+        - _Ensure the server won’t return sensitive extensions_
+        - _Ensure the server won’t accept malicious extensions_
+        - _Test for file upload vulnerabilities_
+    - **Review Backup & Unreferenced Files**
+        - _Ensure unreferenced files don’t contain any sensitive info_
+        - _Ensure the namings of old and new backup files_
+        - _Check the functionality of unreferenced pages_
+    - **Enumerate Infrastructure & Admin Interfaces**
+        - _Try to find the Infrastructure Interface_
+        - _Try to find the Admin Interface_
+        - _Identify the hidden admin functionalities_
+    - **Testing HTTP Methods**
+        - _Discover the supported methods_
+        - _Ensure the PUT method is disabled_
+        - _Ensure the OPTIONS method is disabled_
+        - _Test access control bypass_
+        - _Test for XST attacks_
+        - _Test for HTTP method overriding_
+    - **Test HSTS**
+        - _Ensure HSTS is enabled_
+    - **Test RIA Cross Domain Policy**
+        - _Check for Adobe’s Cross Domain Policy_
+        - _Ensure it has the least privilege_
+    - **Test File Permission**
+        - _Ensure the permissions for sensitive files_
+        - _Test for directory enumeration_
+    - **Test For Subdomain Takeover**
+        - _Test DNS, A, and CNAME records for subdomain takeover_
+        - _Test NS records for subdomain takeover_
+        - _Test 404 response for subdomain takeover_
+        
+    - **Test Cloud Storage**
+        - _Check the sensitive paths of AWS_
+        - _Check the sensitive paths of Google Cloud_
+        - _Check the sensitive paths of Azure_
+----
+- ### ***IDENTITY MANAGEMENT TESTING***
+    - **Test Role Definitions**
+        - _Test for forced browsing_
+        - _Test for IDOR (Insecure Direct Object Reference)_
+        - _Test for parameter tampering_
+        - _Ensure low privilege users can’t able to access high privilege resources_
+    - **Test User Registration Process**
+        - _Ensure the same user or identity can’t register again and again_
+        - _Ensure the registrations are verified_
+        - _Ensure disposable email addresses are rejected_
+        - _Check what proof is required for successful registration_
+    - **Test Account Provisioning Process**
+        - _Check the verification for the provisioning process_
+        - _Check the verification for the de-provisioning process_
+        - _Check the provisioning rights for an admin user to other users_
+        - _Check whether a user is able to de-provision themself or not?_
+        - _Check for the resources of a de-provisioned user_
+    - **Testing For Account Enumeration**
+        - _Check the response when a valid username and password entered_
+        - _Check the response when a valid username and an invalid password entered_
+        - _Check the response when an invalid username and password entered_
+        - _Ensure the rate-limiting functionality is enabled in username and password fields_
+   - **Test For Weak Username Policy**
+        - _Check the response for both valid and invalid usernames_
+        - _Check for username enumeration_
+----
+- ### ***AUTHENTICATION TESTING***
+    - **Test For Un-Encrypted Channel**
+        - _Check for the HTTP login page_
+        - _Check for the HTTP register or sign-in page_
+        - _Check for HTTP forgot password page_
+        - _Check for HTTP change password_
+        - _Check for resources on HTTP after logout_
+        - _Test for forced browsing to HTTP pages_
+    - **Test For Default Credentials**
+        - _Test with default credentials_
+        - _Test organization name as credentials_
+        - _Test for response manipulation_
+        - _Test for the default username and a blank password_
+        - _Review the page source for credentials_
+    - **Test For Weak Lockout Mechanism**
+        - _Ensure the account has been locked after 3-5 incorrect attempts_
+        - _Ensure the system accepts only the valid CAPTCHA_
+        - _Ensure the system rejects the invalid CAPTCHA_
+        - _Ensure CAPTCHA code regenerated after reloaded_
+        - _Ensure CAPTCHA reloads after entering the wrong code_
+        - _Ensure the user has a recovery option for a lockout account_
+    - **Test For Bypassing Authentication Schema**
+        - _Test forced browsing directly to the internal dashboard without login_
+        - _Test for session ID prediction_
+        - _Test for authentication parameter tampering_
+        - _Test for SQL injection on the login page_
+        - _Test to gain access with the help of session ID_
+        - _Test multiple logins allowed or not?_
+    - **Test For Vulnerable Remember Password**
+        - _Ensure that the stored password is encrypted_
+        - _Ensure that the stored password is on the server-side_
+    - **Test For Browser Cache Weakness**
+        - _Ensure proper cache-control is set on sensitive pages_
+        - _Ensure no sensitive data is stored in the browser cache storage_
+    - **Test For Weak Password Policy**
+        - _Ensure the password policy is set to strong_
+        - _Check for password reusability_
+        - _Check the user is prevented to use his username as a password_
+        - _Check for the usage of common weak passwords_
+        - _Check the minimum password length to be set_
+        - _Check the maximum password length to be set_
+    - **Testing For Weak Security Questions**
+        - _Check for the complexity of the questions_
+        - _Check for brute-forcing_
+    - **Test For Weak Password Reset Function**
+        - _Check what information is required to reset the password_
+        - _Check for password reset function with HTTP_
+        - _Test the randomness of the password reset tokens_
+        - _Test the uniqueness of the password reset tokens_
+        - _Test for rate limiting on password reset tokens_
+        - _Ensure the token must expire after being used_
+        - _Ensure the token must expire after not being used for a long time_
+    - **Test For Weak Password Change Function**
+        - _Check if the old password asked to make a change_
+        - _Check for the uniqueness of the forgotten password_
+        - _Check for blank password change_
+        - _Check for password change function with HTTP_
+        - _Ensure the old password is not displayed after changed_
+        - _Ensure the other sessions got destroyed after the password change_
+    - **Test For Weak Authentication In Alternative Channel**
+        - _Test authentication on the desktop browsers_
+        - _Test authentication on the mobile browsers_
+        - _Test authentication in a different country_
+        - _Test authentication in a different language_
+        - _Test authentication on desktop applications_
+        - _Test authentication on mobile applications_
+----
+- ### ***AUTHORIZATION TESTING***
+    - **Testing Directory Traversal File Include**
+        - _Identify the injection point on the URL_
+        - _Test for Local File Inclusion_
+        - _Test for Remote File Inclusion_
+        - _Test Traversal on the URL parameter_
+        - _Test Traversal on the cookie parameter_
+    - **Testing Traversal With Encoding**
+        - _Test Traversal with Base64 encoding_
+        - _Test Traversal with URL encoding_
+        - _Test Traversal with ASCII encoding_
+        - _Test Traversal with HTML encoding_
+        - _Test Traversal with Hex encoding_
+        - _Test Traversal with Binary encoding_
+        - _Test Traversal with Octal encoding_
+        - _Test Traversal with Gzip encoding_
+    - **Testing Travesal With Different OS Schemes**
+        - _Test Traversal with Unix schemes_
+        - _Test Traversal with Windows schemes_
+        - _Test Traversal with Mac schemes_
+    - **Test Other Encoding Techniques**
+        - _Test Traversal with Double encoding_
+        - _Test Traversal with all characters encode_
+        - _Test Traversal with only special characters encode_
+    - **Test Authorization Schema Bypass**
+        - _Test for Horizontal authorization schema bypass_
+        - _Test for Vertical authorization schema bypass_
+        - _Test override the target with custom headers_
+    - **Test For Privilege Escalation**
+        - _Identify the injection point_
+        - _Test for bypassing the security measures_
+        - _Test for forced browsing_
+        - _Test for IDOR_
+        - _Test for parameter tampering to high privileged user_
+    - **Test For Insecure Direct Object Reference**
+        - _Test to change the ID parameter_
+        - _Test to add parameters at the endpoints_
+        - _Test for HTTP parameter pollution_
+        - _Test by adding an extension at the end_
+        - _Test with outdated API versions_
+        - _Test by wrapping the ID with an array_
+        - _Test by wrapping the ID with a JSON object_
+        - _Test for JSON parameter pollution_
+        - _Test by changing the case_
+        - _Test for path traversal_
+        - _Test by changing words_
+        - _Test by changing methods_
+----
+- ### ***SESSION MANAGEMENT TESTING***
+    - **Test For Session Management Schema**
+        - _Ensure all Set-Cookie directives are secure_
+        - _Ensure no cookie operation takes place over an unencrypted channel_
+        - _Ensure the cookie can’t be forced over an unencrypted channel_
+        - _Ensure the HTTPOnly flag is enabled_
+        - _Check if any cookies are persistent_
+        - _Check for session cookies and cookie expiration date/time_
+        - _Check for session fixation_
+        - _Check for concurrent login_
+        - _Check for session after logout_
+        - _Check for session after closing the browser_
+        - _Try decoding cookies (Base64, Hex, URL, etc)_
+    - **Test For Cookie Attributes**
+        - _Ensure the cookie must be set with the secure attribute_
+        - _Ensure the cookie must be set with the path attribute_
+        - _Ensure the cookie must have the HTTPOnly flag_
+    - **Test For Session Fixation**
+        - _Ensure new cookies have been issued upon a successful authentication_
+        - _Test manipulating the cookies_
+    - **Test For Exposed Session Variables**
+        - _Test for encryption_
+        - _Test for GET and POST vulnerabilities_
+        - _Test if GET request incorporating the session ID used_
+        - _Test by interchanging POST with GET method_
+    - **Test For Back Refresh Attack**
+        - _Test after password change_
+        - _Test after logout_
+    - **Test For Cross Site Request Forgery**
+        - _Check if the token is validated on the server-side or not_
+        - _Check if the token is validated for full or partial length_
+        - _Check by comparing the CSRF tokens for multiple dummy accounts_
+        - _Check CSRF by interchanging POST with GET method_
+        - _Check CSRF by removing the CSRF token parameter_
+        - _Check CSRF by removing the CSRF token and using a blank parameter_
+        - _Check CSRF by using unused tokens_
+        - _Check CSRF by replacing the CSRF token with its own values_
+        - _Check CSRF by changing the content type to form-multipart_
+        - _Check CSRF by changing or deleting some characters of the CSRF token_
+        - _Check CSRF by changing the referrer to Referrer_
+        - _Check CSRF by changing the host values_
+        - _Check CSRF alongside clickjacking_
+    - **Test For Logout Functionality**
+        - _Check the log out function on different pages_
+        - _Check for the visibility of the logout button_
+        - _Ensure after logout the session was ended_
+        - _Ensure after logout we can’t able to access the dashboard by pressing the back button_
+        - _Ensure proper session timeout has been set_
+    - **Test For Session Timeout**
+        - _Ensure there is a session timeout exists_
+        - _Ensure after the timeout, all of the tokens are destroyed_
+    - **Test For Session Puzzling**
+        - _Identify all the session variables_
+        - _Try to break the logical flow of the session generation_
+    - **Test For Session Hijacking**
+        - _Test session hijacking on target that doesn’t has HSTS enabled_
+        - _Test by login with the help of captured cookies_
+----
+- ### ***INPUT VALIDATION TESTING***
+    - **Test For Reflected Cross Site Scripting**
+        - _Ensure these characters are filtered <>’’&””_
+        - _Test with a character escape sequence_
+        - _Test by replacing < and > with HTML entities &lt; and &gt;_
+        - _Test payload with both lower and upper case_
+        - _Test to break firewall regex by new line /r/n_
+        - _Test with double encoding_
+        - _Test with recursive filters_
+        - _Test injecting anchor tags without whitespace_
+        - _Test by replacing whitespace with bullets_
+        - _Test by changing HTTP methods_
+    - **Test For Stored Cross Site Scripting**
+        - _Identify stored input parameters that will reflect on the client-side_
+        - _Look for input parameters on the profile page_
+        - _Look for input parameters on the shopping cart page_
+        - _Look for input parameters on the file upload page_
+        - _Look for input parameters on the settings page_
+        - _Look for input parameters on the forum, comment page_
+        - _Test uploading a file with XSS payload as its file name_
+        - _Test with HTML tags_
+    - **Test For HTTP Parameter Pollution**
+        - _Identify the backend server and parsing method used_
+        - _Try to access the injection point_
+        - _Try to bypass the input filters using HTTP Parameter Pollution_
+    - **Test For SQL Injection**
+        - _Test SQL Injection on authentication forms_
+        - _Test SQL Injection on the search bar_
+        - _Test SQL Injection on editable characteristics_
+        - _Try to find SQL keywords or entry point detections_
+        - _Try to inject SQL queries_
+        - _Use tools like SQLmap or Hackbar_
+        - _Use Google dorks to find the SQL keywords_
+        - _Try GET based SQL Injection_
+        - _Try POST based SQL Injection_
+        - _Try COOKIE based SQL Injection_
+        - _Try HEADER based SQL Injection_
+        - _Try SQL Injection with null bytes before the SQL query_
+        - _Try SQL Injection with URL encoding_
+        - _Try SQL Injection with both lower and upper cases_
+        - _Try SQL Injection with SQL Tamper scripts_
+        - _Try SQL Injection with SQL Time delay payloads_
+        - _Try SQL Injection with SQL Conditional delays_
+        - _Try SQL Injection with Boolean based SQL_
+        - _Try SQL Injection with Time based SQL_
+    - **Test For LDAP Injection**
+        - _Use LDAP search filters_
+        - _Try LDAP Injection for access control bypass_
+    - **Testing For XML Injection**
+        - _Check if the application is using XML for processing_
+        - _Identify the XML Injection point by XML metacharacter_
+        - _Construct XSS payload on top of XML_
+    - **Test For Server Side Includes**
+        - _Use Google dorks to find the SSI_
+        - _Construct RCE on top of SSI_
+        - _Construct other injections on top of SSI_
+        - _Test Injecting SSI on login pages, header fields, referrer, etc_
+    - **Test For XPATH Injection**
+        - _Identify XPATH Injection point_
+        - _Test for XPATH Injection_
+    - **Test For IMAP SMTP Injection**
+        - _Identify IMAP SMTP Injection point_
+        - _Understand the data flow_
+        - _Understand the deployment structure of the system_
+        - _Assess the injection impact_
+    - **Test For Local File Inclusion**
+        - _Look for LFI keywords_
+        - _Try to change the local path_
+        - _Use the LFI payload list_
+        - _Test LFI by adding a null byte at the end_
+    - **Test For Remote File Inclusion**
+        - _Look for RFI keywords_
+        - _Try to change the remote path_
+        - _Use the RFI payload list_
+    - **Test For Command Injection**
+        - _Identify the Injection points_
+        - _Look for Command Injection keywords_
+        - _Test Command Injection using different delimiters_
+        - _Test Command Injection with payload list_
+        - _Test Command Injection with different OS commands_
+    - **Test For Format String Injection**
+        - _Identify the Injection points_
+        - _Use different format parameters as payloads_
+        - _Assess the injection impact_
+    - **Test For Host Header Injection**
+        - _Test for HHI by changing the real Host parameter_
+        - _Test for HHI by adding X-Forwarded Host parameter_
+        - _Test for HHI by swapping the real Host and X-Forwarded Host parameter_
+        - _Test for HHI by adding two Host parameters_
+        - _Test for HHI by adding the target values in front of the original values_
+        - _Test for HHI by adding the target with a slash after the original values_
+        - _Test for HHI with other injections on the Host parameter_
+        - _Test for HHI by password reset poisoning_
+    - **Test For Server Side Request Forgery**
+        - _Look for SSRF keywords_
+        - _Search for SSRF keywords only under the request header and body_
+        - _Identify the Injection points_
+        - _Test if the Injection points are exploitable_
+        - _Assess the injection impact_
+    - **Test For Server Side Template Injection**
+        - _Identify the Template injection vulnerability points_
+        - _Identify the Templating engine_
+        - _Use the tplmap to exploit_
+----
+- ### ***ERROR HANDLING TESTING***
+    - **Test For Improper Error Handling**
+        - _Identify the error output_
+        - _Analyze the different outputs returned_
+        - _Look for common error handling flaws_
+        - _Test error handling by modifying the URL parameter_
+        - _Test error handling by uploading unrecognized file formats_
+        - _Test error handling by entering unrecognized inputs_
+        - _Test error handling by making all possible errors_
+----
+- ### ***WEAK CRYPTOGRAPHY TESTING***
+    - **Test For Weak Transport Layer Security**
+        - _Test for DROWN weakness on SSLv2 protocol_
+        - _Test for POODLE weakness on SSLv3 protocol_
+        - _Test for BEAST weakness on TLSv1.0 protocol_
+        - _Test for FREAK weakness on export cipher suites_
+        - _Test for Null ciphers_
+        - _Test for NOMORE weakness on RC4_
+        - _Test for LUCKY 13 weakness on CBC mode ciphers_
+        - _Test for CRIME weakness on TLS compression_
+        - _Test for LOGJAM on DHE keys_
+        - _Ensure the digital certificates should have at least 2048 bits of key length_
+        - _Ensure the digital certificates should have at least SHA-256 signature algorithm_
+        - _Ensure the digital certificates should not use MDF and SHA-1_
+        - _Ensure the validity of the digital certificate_
+        - _Ensure the minimum key length requirements_
+        - _Look for weak cipher suites_
+----
+- ### ***BUSINESS LOGIC TESTING***
+    - **Test For Business Logic**
+        - _Identify the logic of how the application works_
+        - _Identify the functionality of all the buttons_
+        - _Test by changing the numerical values into high or negative values_
+        - _Test by changing the quantity_
+        - _Test by modifying the payments_
+        - _Test for parameter tampering_
+    - **Test For Malicious File Upload**
+        - _Test malicious file upload by uploading malicious files_
+        - _Test malicious file upload by putting your IP address on the file name_
+        - _Test malicious file upload by right to left override_
+        - _Test malicious file upload by encoded file name_
+        - _Test malicious file upload by XSS payload on the file name_
+        - _Test malicious file upload by RCE payload on the file name_
+        - _Test malicious file upload by LFI payload on the file name_
+        - _Test malicious file upload by RFI payload on the file name_
+        - _Test malicious file upload by SQL payload on the file name_
+        - _Test malicious file upload by other injections on the file name_
+        - _Test malicious file upload by Inserting the payload inside of an image by the bmp.pl tool_
+        - _Test malicious file upload by uploading large files (leads to DOS)_
+----
+- ### ***CLIENT SIDE TESTING***
+    - **Test For DOM Based Cross Site Scripting**
+        - _Try to identify DOM sinks_
+        - _Build payloads to that DOM sink type_
+    - **Test For URL Redirect**
+        - _Look for URL redirect parameters_
+        - _Test for URL redirection on domain parameters_
+        - _Test for URL redirection by using a payload list_
+        - _Test for URL redirection by using a whitelisted word at the end_
+        - _Test for URL redirection by creating a new subdomain with the same as the target_
+        - _Test for URL redirection by XSS_
+        - _Test for URL redirection by profile URL flaw_
+    - **Test For Cross Origin Resource Sharing**
+        - _Look for “Access-Control-Allow-Origin” on the response_
+        - _Use the CORS HTML exploit code for further exploitation_
+    - **Test For Clickjacking**
+        - _Ensure “X-Frame-Options” headers are enabled_
+        - _Exploit with iframe HTML code for POC_
+----
+- ### ***OTHER COMMON ISSUES***
+    - **Test For No-Rate Limiting**
+        - _Ensure rate limiting is enabled_
+        - _Try to bypass rate limiting by changing the case of the endpoints_
+        - _Try to bypass rate limiting by adding / at the end of the URL_
+        - _Try to bypass rate limiting by adding HTTP headers_
+        - _Try to bypass rate limiting by adding HTTP headers twice_
+        - _Try to bypass rate limiting by adding Origin headers_
+        - _Try to bypass rate limiting by IP rotation_
+        - _Try to bypass rate limiting by using null bytes at the end_
+        - _Try to bypass rate limiting by using race conditions_
+    - **Test For Weak 2FA**
+        - _Try to bypass 2FA by using poor session management_
+        - _Try to bypass 2FA via the OAuth mechanism_
+        - _Try to bypass 2FA via brute-forcing_
+        - _Try to bypass 2FA via response manipulation_
+        - _Try to bypass 2FA by using activation links to login_
+        - _Try to bypass 2FA by using status code manipulation_
+        - _Try to bypass 2FA by changing the email or password_
+        - _Try to bypass 2FA by using a null or empty entry_
+        - _Try to bypass 2FA by changing the boolean into false_
+        - _Try to bypass 2FA by removing the 2FA parameter on the request_
+    - **Test For Weak OTP Implementation**
+        - _Try to bypass OTP by entering the old OTP_
+        - _Try to bypass OTP by brute-forcing_
+        - _Try to bypass OTP by using a null or empty entry_
+        - _Try to bypass OTP by response manipulation_
+        - _Try to bypass OTP by status code manipulation_
+    - **Test For EXIF Geodata**
+        - _Ensure the website is striping the geodata_
+        - _Test with EXIF checker_
+    - **Test For Broken Link Hijack**
+        - _Ensure there is no broken links are there_
+        - _Test broken links by using the blc tool_
+    - **Test For SPF**
+        - _Ensure the website is having SPF record_
+        - _Test SPF by nslookup command_
+----
+----
+----
+
+## **CONNECT WITH ME :**
+[![Twitter](https://img.shields.io/twitter/url?label=Twitter&logo=twitter&style=social&url=https%3A%2F%2Ftwitter.com%2FYourTwitterHandle)](https://twitter.com/Bhavesh_Pardhi_)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn--blue?style=social&logo=linkedin)](https://www.linkedin.com/in/bhavesh-pardhi-)
+[![GitHub](https://img.shields.io/badge/GitHub--black?style=social&logo=github)](https://github.com/bhavesh-pardhi)
+[![Snapchat](https://img.shields.io/badge/Snapchat--yellow?style=social&logo=snapchat)](https://www.snapchat.com/add/bhaveshpardhi0)
+[![Instagram](https://img.shields.io/badge/Instagram--purple?style=social&logo=instagram)](https://www.instagram.com/bhavesh_pardhi_)
+[![HackerOne](https://img.shields.io/badge/HackerOne--red?style=social&logo=hackerone)](https://hackerone.com/bhavesh_cxs)
+
+## **SUPPORT :**
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-orange?style=for-the-badge&logo=buy-me-a-coffee)](https://www.buymeacoffee.com/bhaveshpardhi)
